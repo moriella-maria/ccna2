@@ -1,0 +1,55 @@
+@Corebaba
+conf t
+monitor session 1 source interface fa0/5, fa0/7
+monitor session 1 destination interface fa0/1, fa0/9
+
+
+@A1
+conf t
+ interface e0/0
+  switchport mode access
+  switchport access vlan 10
+  end
+show vlan br
+
+@A2
+conf t
+ interface e1/0
+  switchport mode access
+  switchport access vlan 10
+  end
+show vlan br
+
+@P1
+conf t
+ int e0/0
+  no shut
+  ip add dhcp
+  end
+bp
+
+
+@P2
+conf t
+ int e1/0
+  no shut
+  ip add dhcp
+  end
+bp
+
+
+DHCP
+ Discover - broadcast packet
+ Offer - unicast
+ Request - broadcast
+ Acknowledge - unicast
+
+
+@D1 - to allow automate from home for D1
+conf t
+ int e3/3
+   no switchport
+   no shut
+   ip add dhcp
+   end
+bp
